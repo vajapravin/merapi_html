@@ -1,0 +1,965 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0369)http://172.20.5.254/UserCheck/PortalMain?IID=A18C44C4-6D72-6F67-6F76-696E9AB57E6F&origUrl=aHR0cDovL3d3dy5mYWNlYm9vay5jb20vcGx1Z2lucy9saWtlYm94LnBocD9ocmVmPWh0dHAlM0ElMkYlMkZ3d3cuZmFjZWJvb2suY29tJTJGdGhlbWVzYXdlc29tZSZ3aWR0aD0zNTAmaGVpZ2h0PTQzMiZjb2xvcnNjaGVtZT1saWdodCZzaG93X2ZhY2VzPXRydWUmc3RyZWFtPWZhbHNlJnNob3dfYm9yZGVyPXRydWUmaGVhZGVyPWZhbHNlJmZvcmNlX3dhbGw9ZmFsc2U -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+        	
+		
+		<link rel="icon" type="image/vnd.microsoft.icon" href="http://172.20.5.254/UserCheck/img/favicon.ico">                          <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="http://172.20.5.254/UserCheck/img/favicon.ico">         
+		<link id="dynamicCSS" rel="stylesheet" type="text/css" href="Blob_dynamic_css">
+		<link id="staticCSS" rel="stylesheet" type="text/css" href="Blob_static.css">
+
+		
+				<script type="text/javascript">
+			//Create a dynamic element to allow sending of the document mode of IE.
+			//This way we can notify PHP that it can display modern content instead of classic, despite the browser's reporting of being IE7.
+			var headID = document.getElementsByTagName("head")[0];         
+			var cssNode = document.createElement('link');
+			cssNode.type = 'text/css';
+			cssNode.rel = 'stylesheet';
+			cssNode.href = "/UserCheck/css/UserCheckCSS" + (document.documentMode !== undefined ? "?documentMode=" + document.documentMode : "");
+			headID.appendChild(cssNode);
+		
+			
+/*
+========================================================================================================================
+PORTAL IS - ESSENTIALS INCLUSION - START
+________________________________________________________________________________________________________________________
+*/
+// Set global PORTAL_IS namespace.
+window.PORTAL_IS = {};
+
+// Set namespace.
+PORTAL_IS.CONF = {};
+
+PORTAL_IS.CONF.AJAX_REQ_TIMEOUT = 15000;
+
+// These properties describes the external references of the portal.
+PORTAL_IS.CONF.MULTI_PORTALS = {};
+PORTAL_IS.CONF.MULTI_PORTALS.EXTERNAL_PATH 		= "";
+PORTAL_IS.CONF.MULTI_PORTALS.EXTERNAL_PORT		= 443;
+PORTAL_IS.CONF.MULTI_PORTALS.EXTERNAL_HOST		= "192.168.0.0";
+PORTAL_IS.CONF.MULTI_PORTALS.EXTERNAL_SCHEME	= "https";
+PORTAL_IS.CONF.MULTI_PORTALS.XSRF_TOKEN			= "";
+
+// The current web application name.
+PORTAL_IS.CONF.WEBAPP_NAME = "UserCheck";
+
+// Debug configurations
+PORTAL_IS.CONF.MAX_STACK_SIZE = 1000;
+PORTAL_IS.CONF.QUIET_MODE		= "on".toLowerCase() == "on";
+PORTAL_IS.CONF.DEBUG_LEVEL 	= 0;
+
+
+// Set namespace.
+window.PORTAL_IS.L10N = {}
+
+// Localization object.
+//=============================================================================================
+function __L10N()
+{
+	this.strings = new Array();
+	this.browserLangs = new Array();
+
+	this.init = function()
+	{
+		var obj = {"UC_TITLE":"Check Point UserCheck","BUTTON.OK":"OK","BUTTON.CANCEL":"Cancel","WRONG_ID":"This notification page has expired. You can safely close the page or ","TIMEOUT":"This notification page has expired. You can safely close the page or ","RETRY":"reload the original page.","REPORT_SUCCESS":"Report was sent successfully.","REPORT_ERROR":"An error occured while sending the report.","REQUIRED_FIELDS":"Required fields","ENTER_TEXT":"Enter text","UC.BLOCKED_IFRAME":"Learn more...","UC.INFO_IFRAME":"Click to resolve...","PLEASE_WAIT":"Please wait . . .","NO_SCRIPT":"This portal requires browser which support JavaScript.<br>Please make sure that you are using an updated browser and that JavaScript is enabled.","MSGBOX_TITLE_CONFIRMATION":"Confirmation","MSGBOX_TITLE_JUSTIFICATION":"Justification","MSGBOX_TITLE_APPROVER":"Approver","MSGBOX_TITLE_WARNING":"Warning","MSGBOX_TITLE_ATTENTION":"Attention","MSGBOX_TITLE_ERROR":"Error","MSGBOX_TITLE_REPORT_ERROR":"Report an error","MSGBOX_TITLE_EXTEND_EXPIRATION":"Extend expiration date","DEFAULT_GENERIC_CLIENT_ERROR":"An unexpected error has occurred.\nYou may still be able to continue working normally.\nPlease retry accessing the web page in a short while.\n\n","DEFAULT_GENERIC_TIMEOUT_CLIENT_ERROR":"You may not access this page, or this page has expired.\nPlease sign in.","LOG_REFERENCE_ID":"Log reference id: ","ERROR.LINK.SEND_ERROR_REPORT":"Send error report","ERROR.LINK.IM_HAVING_PROBLEMS":"I am having problems with this Portal.","CHECKPOINT_COPY_RIGHTS":"&copy;2011 Check Point Software Technologies Ltd."};
+		
+		for(val in obj)
+			this.strings[val] = obj[val];
+			
+		obj = ["en-US","en;q=0.8"];
+		
+		for(val in obj)
+		{
+			this.browserLangs[val] = obj[val].split(';')[0];
+		}
+	}
+
+	this.getStr = function(stringId)
+	{
+		return this.strings[stringId];
+	}
+	
+	this.selectLanguage = function(languageArray)
+	{
+		for(lang in this.browserLangs)
+		{
+			if(languageArray[this.browserLangs[lang]] === true)
+				return this.browserLangs[lang];
+				
+			if(languageArray[this.browserLangs[lang].substring(0, 2)] === true)
+				return this.browserLangs[lang].substring(0, 2);
+		}
+		
+		//If nothing succeeded, return the default.
+		return "en";
+	}
+	
+	this.reloadLanguageTo = function(lang, fallbackLang, callback)
+	{
+		var requestData = {};
+		
+		requestData.lang = lang;
+		requestData.fallbackLang = fallbackLang;
+
+		var sAbsoluteURL = PORTAL_IS.TOOLS.getURL("data/GetTranslationData");
+	
+		sendAsynchronousRequest(sAbsoluteURL,
+								flattenObject(requestData),
+								this.asyncReloadLangHandler,
+								this,
+								[callback]);
+	}
+	
+	this.asyncReloadLangHandler = function(xhrStatus, xhrResponse, callback)
+	{
+		if (xhrStatus != 200)
+		{
+			DEBUG.out('Retreiving translation data failed. ('+xhrStatus+')', DEBUG.ERROR);
+			return;
+		}
+		
+		var obj = JSON.parse(xhrResponse);
+		this.strings = null; //Ensure removing of old values.
+		this.strings = new Array();
+		
+		for(val in obj)
+			this.strings[val] = obj[val];
+			
+		callback();
+	}
+}
+//=============================================================================================
+
+//Localization object.
+L10N_Obj = new __L10N();
+L10N_Obj.init();
+PORTAL_IS.L10N.L10N_Obj = L10N_Obj;
+
+/*
+________________________________________________________________________________________________________________________
+
+PORTAL IS - ESSENTIALS INCLUSION - END
+========================================================================================================================
+*/
+			var noJSCrypto = "true";
+		</script><link type="text/css" rel="stylesheet" href="UserCheckCSS">
+		<script type="text/javascript" src="Blob.js"></script>
+		<script type="text/javascript">
+			
+
+// Create namespace
+window.UserCheck = {};
+window.UserCheck.tools = {};
+
+// =======================================================================================
+function parseSender(value)
+{
+	return value.address;
+}
+// =======================================================================================
+
+
+// =======================================================================================
+// Render recipient list from and array.
+// String[] recipientsArr   - Array of recipients.
+// [int ellipsisLimit]      - A string beyond this length will be cut and added ellipsis. Optional, default is 0 - no ellipsis.
+// [bool useLinebreakes]    - Should a line break be added after each recipient. Optional, default is true.
+function recipientsArr2StrInTable(recipientsArr, ellipsisLimit, useLinebreakes)
+{
+    if (ellipsisLimit == undefined)
+    {
+        ellipsisLimit = 0;
+    }
+
+    if (useLinebreakes == undefined)
+    {
+        useEllipsis = true;
+    }
+
+	var recipientsList = "";
+
+	for (var i=0; i<recipientsArr.length; i++)
+	{
+		recipientsList += HTMLEncode(recipientsArr[i].address);
+		if (i < recipientsArr.length-1)
+		{
+			recipientsList += ", ";
+			if (useLinebreakes)
+			{
+			    recipientsList += "<br>";
+            }
+		}
+	}
+
+	if (ellipsisLimit > 0)
+	{
+	    //recipientsList = Ext.util.Format.ellipsis(recipientsList, ellipsisLimit);
+	    recipientsList = recipientsList;
+    }
+
+	return recipientsList;
+}
+// =======================================================================================
+
+
+// =======================================================================================
+// Render recipient list from and array.
+// Sender sender            - The sender data.
+// [int ellipsisLimit]      - A string beyond this length will be cut and added ellipsis. Optional, default is 0 - no ellipsis.
+// [bool useLinebreakes]    - Should a line break be added after each recipient. Optional, default is true.
+function getSenderName(sender, ellipsisLimit)
+{
+    var output = "";
+
+    if (ellipsisLimit == undefined)
+    {
+        ellipsisLimit = 0;
+    }
+
+    if (sender.name.empty())
+    {
+        output = sender.address;
+    }
+    else
+    {
+        output = sender.name;
+    }
+
+//	if (ellipsisLimit > 0)
+//	{
+//	    output = Ext.util.Format.ellipsis(output, ellipsisLimit);
+//    }
+
+	 return output;
+}
+// =======================================================================================
+
+
+// =======================================================================================
+// Render recipient list from and array.
+// String sender            - The subject string.
+// [int ellipsisLimit]      - A string beyond this length will be cut and added ellipsis. Optional, default is 0 - no ellipsis.
+// [bool useLinebreakes]    - Should a line break be added after each recipient. Optional, default is true.
+function getSubject(subject, ellipsisLimit)
+{
+    var output = subject;
+
+    if (ellipsisLimit == undefined)
+    {
+        ellipsisLimit = 0;
+    }
+
+//	if (ellipsisLimit > 0)
+//	{
+//	    output = Ext.util.Format.ellipsis(output, ellipsisLimit);
+//    }
+
+	 return output;
+}
+// =======================================================================================
+
+
+// =======================================================================================
+// tranform recipients array to string
+function recipientsArr2Str(recipientsArr,type) 
+{
+    var recipientsList = "";
+    var address = "";
+    var commaNeeded = false;
+    for (var i=0; i<recipientsArr.length; i++)
+    {
+        if (type == recipientsArr[i].recipientType)
+        {
+            if (!commaNeeded)
+                commaNeeded = true;
+            else                                
+                recipientsList += ", ";
+                
+            address = HTMLEncode(recipientsArr[i].address);
+            if (recipientsArr[i].isExternal)
+            {
+                address = '<span ' + GetDomainColor(recipientsArr[i].address)+' >' + address + '</span>'
+            }  
+            recipientsList += address;
+        }
+    }
+
+    return recipientsList;
+}
+
+// =======================================================================================
+function arr2Str(arr)
+{
+    var str = "";
+    var commaNeeded = false;
+    for (var i=0; i<arr.length; i++)
+    {
+        if (!commaNeeded)
+        {
+            commaNeeded = true;
+        }
+        else
+        {
+            str += ", ";
+        }
+        str += arr[i];
+    }
+
+    return str;
+}
+
+function GetDomainColor(str)
+{
+    // var highlightColors = new Array("FFFF00","00FF00","00FFFF","FF00FF","FF0000","FFFF99","99FF99","CCFFFF","FFCCFF", "FF9999")
+	var highlightColors = new Array("FFFF00","FF00FF","FF0000","FFBB00","FF9999");
+    domainName = GetDomainName(str);
+    if (domainName==null) return null;
+
+    hash=0;
+    for (i=0; i<domainName.length; i++)
+    {
+        hash += domainName.charCodeAt(i);
+    }
+    hash = hash % (highlightColors.length);
+    return 'style="background-color: #' + highlightColors[hash] + '; text-decoration: underline;"';
+}
+
+/*
+// =======================================================================================
+UserCheck.tools.clearContainer = function(containerId)
+{
+    DEBUG.out("Clear container: "+containerId);
+	var container = Ext.getCmp(containerId);
+    if ((container) && (container.items))
+    {
+        container.items.each(
+            function(item)
+            {
+             container.remove(item, true);
+            }
+        );
+    }
+}
+// =======================================================================================
+*/
+
+// Override poral_is error handler.
+//=============================================================================================
+window.genericTimeoutHandler = function(portalException)
+{
+	DEBUG.out("UserCheck::genericTimeoutHandler.");
+
+	if ((portalException == undefined) || (portalException == null))
+	{
+		portalException = new PortalException();
+	}
+	
+	// Assign action to the Ok button.
+	// The event is added in order to get the exception, if it is set, that is set as the error message OK button attribute. see showPortalErrorMessage
+	postErrorHandler = function(event)
+	{
+		// Check if redirected due to timeout.
+		if (getCookie("isRedirectedDueTimeout") == "1")
+		{
+			// Delete the cookie to allow future errors.
+			setCookie("isRedirectedDueTimeout", "0", 0);
+
+			// TODO: Redirect to error page.
+			return;
+		}
+
+		// Set cookie in order to prevent error loops.
+		setCookie("isRedirectedDueTimeout", "1", 5*60);
+
+		genericPostErrorHandler(event);
+
+		// Reload the page.
+		document.location.href=document.location.href;
+	}
+
+	// TODO: Get message from resource bundle.
+	//var errMsg = "Your session has expired or timed out.\nYou will be redirected to the login page.\n\n";
+	showPortalErrorMessage(portalException, postErrorHandler, true);
+}
+//=============================================================================================
+
+
+
+//=============================================================================================
+window.genericErrorHandler = function(portalException, callback)
+{
+	DEBUG.out("UserCheck::genericErrorHandler.");
+	if ((portalException == undefined) || (portalException == null))
+	{
+		portalException = new PortalException();
+	}
+
+	if (isNothingness(callback))
+	{
+		callback = new Callback();
+	}
+
+	// Assign action to the Ok button.
+	// The event is added in order to get the exception, if it is set, that is set as the error message OK button attribute. see showPortalErrorMessage
+	postErrorHandler = function(event)
+	{
+		genericPostErrorHandler(event);
+        callback.call();
+		// No reload of the page.
+	}
+
+	showPortalErrorMessage(portalException, postErrorHandler, true);
+	return true; // This is required for the execption to stop from being passed to the browser.
+}
+//=============================================================================================
+
+
+
+//=============================================================================================
+window.genericPostErrorHandler = function(event)
+{
+	DEBUG.out("UserCheck::genericPostErrorHandler.");
+	// Just hide the error.
+	hidePortalErrorMessage();
+}
+//=============================================================================================
+
+//=============================================================================================
+UserCheck.tools.sendErrorReport = function(userDesc, callback)
+{
+	DEBUG.out("UserCheck.tools.sendErrorReport in.");
+
+    var sAbsoluteURL = getURL("data/submitErrorReport");
+    var report = encodeURIComponent(DEBUG.compileErrorReport());
+    var userDesc = encodeURIComponent(userDesc);
+
+	var sendErrorReportCallback = new Callback();
+	sendErrorReportCallback.methodReference = UserCheck.tools.handleErrorReportResponse;
+	sendErrorReportCallback.args.push(callback);
+
+	// Send report with no error handlers.
+	PORTAL_IS.AJAX_MGR.sendAsyncReq(sAbsoluteURL, "report="+report+"&userDesc="+userDesc, sendErrorReportCallback, null, null, "Sending of error report failed.");	
+
+	// Set error flag.
+	PORTAL_IS.TOOLS.errorMsgShown = false;	
+}
+//=============================================================================================
+
+//=============================================================================================
+UserCheck.tools.handleErrorReportResponse = function(xhrStatus, xhrResponse, callback)
+{
+	DEBUG.out("UserCheck.tools.handleErrorReportResponse in.");
+
+	// Set error flag.
+	PORTAL_IS.TOOLS.errorMsgShown = false;
+
+	if (isNothingness(callback))
+	{
+		callback = new Callback();
+	}
+
+	if (xhrStatus != 200)
+	{
+		// TODO: Handle error.
+		DEBUG.out('Submitting error report failed. ('+xhrStatus+')', DEBUG.ERROR);
+		callback.call();
+		showPortalMessage("Sending of error report failed.");
+		return;
+	}
+
+	callback.call();
+	
+	showPortalMessage("Error report was sent successfully.\nThank you for your support.", null, UserCheck.MESSAGE_TYPE.Confirmation);
+}
+//=============================================================================================
+
+//=============================================================================================
+UserCheck.tools.showErrorReport = function(callback)
+{
+	DEBUG.out("UserCheck.tools.showErrorReport in.");
+
+	// Create new callback with send report and store previous callback in it.
+	submitCallback = new Callback();
+	submitCallback.methodReference 	= DEBUG.sendErrorReport;
+	submitCallback.args = [callback];
+
+	// Create new callback for cancel.
+	cancelCallback = new Callback();
+	cancelCallback.methodReference 	= function()
+	{
+		// Clear error flag. 
+		PORTAL_IS.TOOLS.errorMsgShown = false;
+		callback.call();
+	};
+
+    // Hide any opened boxes.
+    PORTAL_IS.TOOLS.hideGeneralContainer();
+    PORTAL_IS.TOOLS.hideDialog();
+    hidePortalMessage();
+    hidePortalErrorMessage();
+
+ 	PORTAL_IS.TOOLS.showDialog(	"Please describe the encountered problem in the text box below.",
+ 							"NOTICE: The report might include personal information from your mail items.\nThe report will not include your credentials.",
+ 							"I was trying to (e.g. review an email):\n\nWork flow which led to this error (e.g. access via email link):\n\nI am unable to:",
+ 							"Report an error",
+ 							submitCallback, cancelCallback, null, null, null, null, true);
+
+	// Set error flag. 
+	PORTAL_IS.TOOLS.errorMsgShown = true;
+}
+//=============================================================================================
+
+
+//=============================================================================================
+
+
+//=============================================================================================
+
+DEBUG.showErrorReport = UserCheck.tools.showErrorReport;
+DEBUG.sendErrorReport = UserCheck.tools.sendErrorReport;
+
+UserCheck.tools.oTimeoutManager =
+{
+	timerID: -1,
+	startTimeoutTimer: function(duration, callback)
+	{
+		var milisecs = duration * 1000;
+		DEBUG.out("UserCheck.tools.TimeoutManager: Starting timer for " + duration + " seconds.");
+		window.TimeoutManagerCallback = callback;
+		this.timerID = setTimeout("this.TimeoutManagerCallback();", milisecs);
+	},
+	stopTimeoutTimer: function()
+	{
+		clearTimeout(timerID);
+		timerID = -1;
+	}
+};
+
+UserCheck.DataObj = {};
+
+// TODO: This should be defined as an "interface" class and other view managers should implement it.
+
+// UC's view manager.
+window.UCViewManager = function()
+{
+	this.lastRenderedCustomContentContainers = new Array();
+	this.defaultContainer = 'portal_main_view';
+	this.ignoreHashChange = false;
+    this.wait = null;
+    this.requestParams = null;
+
+	// Hash to view mapping, enables us to set display another value than the actual view name.
+	//==================================================================================================================
+	this.hashViewMap = new Array();
+	//   		      Hash name									View name
+	//__________________________________________________________________________________________________________________
+	this.hashViewMap["UserAction"]								=	"UserAction";
+	this.hashViewMap["MainWithMenuView"]					=	"MainWithMenuView";
+	this.hashViewMap["Menu"]								=	"Menu";
+	this.hashViewMap["Logout"]								=	"Logout";
+	this.hashViewMap["MainView"]							=	"MainView";
+	this.hashViewMap["Error"]								=	"Error";
+
+	// Get View name from Hash name.
+	this.hash2View = function(hash)
+	{
+		var view = this.hashViewMap[hash];
+
+		if (isNothingness(view))
+		{
+			view = "UserAction";
+		}
+		return view;
+	}
+
+	// Get Hash name from View name.
+	this.view2Hash = function(view)
+	{
+		var hash = "UserAction";
+		for (key in this.hashViewMap)
+		{
+			if (this.hashViewMap[key] == view)
+			{
+				var hash = key;
+			}
+		}
+		return hash;
+	}
+	//==================================================================================================================
+
+    // Initialize view manager.
+	//=============================================================================================
+	this.init = function()
+	{
+		DEBUG.out("UCViewManager::init");
+
+		// Bind history change handler.
+		$(window).bind('hashchange', viewManager.handleHistoryChange);
+
+        // Check address bar's hash and set desired view if exists.
+		var desiredView = this.parseHash().view;
+		if (isNothingness(desiredView))
+		{
+			desiredView = "";
+		}
+
+		DEBUG.out("UCViewManager::init, desired view: [" + desiredView + "]");
+		this.gotoNextView(desiredView);
+	}
+	//=============================================================================================
+
+
+
+    // Handle history changes (back/reload).
+    // Overriding default handling.
+	//=============================================================================================
+	this.handleHistoryChange = function(e, ui)
+	{	
+		// In some cases the hash is changed and no view load is required, checking if so.
+		if (!viewManager.ignoreHashChange && ui != undefined)
+		{
+			// Parse view from hash.
+			var desiredView = viewManager.parseHash().view;
+			DEBUG.out("UCViewManager::handleHistoryChange, desired view:" + desiredView);
+			viewManager.gotoNextView(desiredView);
+		}
+		else
+		{
+			DEBUG.out("UCViewManager::handleHistoryChange, hash changed ignored.");	
+		}
+
+		// Reset the ignore flag.
+        viewManager.ignoreHashChange = false;
+	}
+	//=============================================================================================
+
+
+	// Queries the server for next desired view and than call for rendering it.
+	// Will call upon callback when done rendering the view.
+	//=============================================================================================
+	this.gotoNextView = function(requestedView, callback)
+	{
+    	DEBUG.out("UCViewManager::gotoNextView");
+
+    	if (isNothingness(callback))
+    	{
+    	    callback = new Callback();
+		}
+
+        // Check what is the next view.
+        var sAbsoluteURL 	= PORTAL_IS.TOOLS.getURL("GetNextView");
+		var parameters 		= (isNothingness(requestedView)) ? ("") : ("requestedView=" + encodeURIComponent(requestedView));
+
+		var gotoNextViewCallback = new Callback();
+			gotoNextViewCallback.methodReference    = this.handleGotoNextViewRequest;
+			gotoNextViewCallback.thisArgument       = this;
+			gotoNextViewCallback.args               = [callback];
+
+        PORTAL_IS.AJAX_MGR.sendAsyncReq(sAbsoluteURL, parameters, gotoNextViewCallback);
+	}
+	//=============================================================================================
+
+
+	// Handle next view query.
+	//=============================================================================================
+	this.handleGotoNextViewRequest = function(xhrStatus, xhrResponse, callback)
+	{
+		DEBUG.out("UCViewManager::handleGotoNextViewRequest");
+
+		if (isNothingness(callback))
+    	{
+    	    callback = new Callback();
+		}
+
+		if (xhrStatus != 200)
+		{
+			DEBUG.out('Retreiving next view failed. ('+xhrStatus+')', DEBUG.ERROR);
+			callback.call();
+			return;
+		}
+
+		var nextViewJSONObj = JSON.parse(xhrResponse);
+        var nextView = nextViewJSONObj.view;
+		DEBUG.out("UCViewManager::handleGotoNextViewRequest, next view:" + nextView);
+
+		// Extract the data (request params) from hash and relay it onto next hash.
+		// As hash changing handler will be passed back to this method we set the Ignore flag to TRUE
+		// and call for the gotoView method.
+		viewManager.changeHash(nextView, viewManager.parseHash().data, true);
+
+		viewManager.gotoView(nextView, callback);
+	}
+	//=============================================================================================
+
+
+	// Get view contents (CSS, JS and HTML).
+	// Will call upon callback when done rendering the view.
+	//=============================================================================================
+	this.gotoView = function(view, callback)
+	{
+        DEBUG.out("UCViewManager::gotoView view: ["+view+"]");
+
+        if (callback == undefined)
+    	{
+    	    callback = new Callback();
+		}
+
+		var hash = this.parseHash().view;
+		var parameters = (hash == "") ? ("view="+encodeURIComponent(hash)) : ( "requestedView=" + encodeURIComponent(view) + "&view="+encodeURIComponent(hash) );
+
+		sendAsynchronousRequest(PORTAL_IS.TOOLS.getURL("viewManager/GetViewData"),
+								parameters,
+								this.handleNewView,
+								this,
+								[callback]);
+	}
+	//=============================================================================================
+
+
+    // Handle new view rendering.
+	//=============================================================================================
+	this.handleNewView = function(xhrStatus, xhrResponse, callback)
+	{
+		if (callback == undefined)
+    	{
+    	    callback = new Callback();
+		}
+
+		if (xhrStatus != 200)
+		{
+			// TODO: Handle error.
+			DEBUG.out('Retreiving view failed. ('+xhrStatus+')', DEBUG.ERROR);
+			callback.call();
+			return;
+		}
+
+		var newViewJSONObj = JSON.parse(xhrResponse);
+        var newView = newViewJSONObj.view;
+		DEBUG.out("UCViewManager::handleNewView, Parsed from JSON - view:" + newView);
+
+
+		var useDefaultContainerId   = true;
+		var requiredContainerId     = "";
+		var requiredView            = "";
+		var requireSecureConnection = false;
+
+		switch (newView)
+		{
+			default: // View will be rendered into main page view.
+				useDefaultContainerId   = true;
+				requiredContainerId     = this.defaultContainer;
+			break;
+		}
+
+		// Check if in https, redirect if not.
+		if ((requireSecureConnection) && (location.protocol.toLowerCase() == 'http:'))
+		{			
+			newLocation = location.href.replace(/http:/i, "https:");
+			location.href = newLocation;
+			return;
+		}
+
+		var containerId = this.defaultContainer;
+		if (!useDefaultContainerId)
+		{
+			containerId = requiredContainerId;
+		}
+
+		//var container = Ext.getCmp(containerId);
+		var container = document.getElementById(containerId);
+
+        if (container != undefined)
+		{
+
+			DEBUG.out('Render new view ('+newViewJSONObj.view+') into [' + (useDefaultContainerId ? "DefaultContainer" : requiredContainerId) + "].");
+
+			// Render CSS. - Not needed, all CSS loads from one blob file.
+			//evaluateCSS(newViewJSONObj.css, "");
+
+			// Clear existing content.
+			container.innerHTML = "";
+
+			// If the html content is not empty, render it into a new pane.
+			container.innerHTML = newViewJSONObj.html;
+
+			// Render JavaScript Content.
+			evaluateJavaScript(newViewJSONObj.javascript);
+
+		}
+		else if (requiredContainerId == this.defaultContainer)
+		{
+
+			DEBUG.out('Default view is missing and will be rendered...');
+			this.renderDefaultView();
+			this.handleNewView(xhrStatus, xhrResponse, callback);
+
+		}
+		else // The container is not present and needs to be rendered first.
+		{
+
+			DEBUG.out('Required view ('+requiredContainerId+') is missing and needs to be rendered first.');
+
+			// Set the previous view results in a callback, it will be called when finished rendering of the login sequence page.
+			var requiredViewCallback = new Callback();
+			requiredViewCallback.methodReference    = this.handleNewView;
+			requiredViewCallback.thisArgument       = this;
+			requiredViewCallback.args               = [200, xhrResponse]; // Set fake status and response.
+
+			// Request specific view.
+			this.gotoView(requiredView, requiredViewCallback);
+
+		}
+
+		// TODO: detect loops.
+
+
+		// Done here, call the callback.
+		//this.wait.hide();
+        callback.call();
+	}
+	//=============================================================================================
+
+
+
+
+
+
+	// CUSTOM CONTENT RELATED METHODS
+	// _________________________________________________________________________________________________________________
+
+	// Get the view's custom Content.
+	//=============================================================================================
+	this.getViewCustomContent = function(view)
+	{
+		this.clearLastCustomContent();
+
+		var sAbsoluteURL = PORTAL_IS.TOOLS.getURL("JSONViewData/GetViewCustomContent");
+		sendAsynchronousRequest(sAbsoluteURL,
+								"view="+view,
+								this.renderCustomContent,
+								this,
+								[]);
+	}
+	//=============================================================================================
+
+
+	// Render the custom content.
+	//=============================================================================================
+	this.renderCustomContent = function(xhrStatus, xhrResponse, callbackObj)
+	{
+		DEBUG.out('Render custom content.');
+		callback = new Callback(callbackObj);
+
+		if (xhrStatus != 200)
+		{
+			// TODO: Handle error.
+			DEBUG.out('Retreiving custom content failed. ('+xhrStatus+')', DEBUG.ERROR);
+			callback.call();
+			return;
+		}
+
+		// The container Id is: "CustomContent_<VIEW NAME>_<RESOURCE KEY>".
+		// For example: the "ISW" view and the resource key of "top" will be rendered into "CustomContent_ISW_top".
+
+		var newCustomContentJSONObj = JSON.parse(xhrResponse);
+        var keyArr  = newCustomContentJSONObj.keyArr;
+        var view    = newCustomContentJSONObj.view
+
+		// Override view.
+		switch (view)
+		{
+			case "ICS":                 // No brake, group these views.
+			case "Authentication":
+			case "ISW":
+			case "MultiChallenge":
+			case "IswEntry":
+				var usedView = "LoginSequencePage";
+			break;
+
+			default:
+				var usedView = view;
+			break;
+		}
+
+        // Iterate on each of the custom content object.
+        var customContent, containerId, key;
+        //for (var key in keyMap)
+        for (var i=0; i<keyArr.length; i++)
+		{
+			key = keyArr[i][0];
+			customContent = keyArr[i][1];
+			containerId = "CustomContent_"+usedView+"_"+key;
+			DEBUG.out('Render custom content: usedView:['+usedView+"] into:["+containerId+"]");
+            this.evaluateCustomContent(customContent, containerId);
+            this.lastRenderedCustomContentContainers.push(containerId);
+		}
+
+		// Call the callback.
+		callback.call();
+	}
+
+    // Encapsulate conditional rendering of the custom content.
+	this.evaluateCustomContent = function(customContent, containerId)
+	{
+		destinationRef = document.getElementById(containerId);
+		if ( (destinationRef != null) && (destinationRef != undefined) )
+		{
+			evaluateHTMLContent(customContent, destinationRef);
+		}
+	}
+	//=============================================================================================
+
+
+	// Clear last rendered containers.
+	//=============================================================================================
+	this.clearLastCustomContent = function()
+	{
+		for (var containerIndex in this.lastRenderedCustomContentContainers)
+		{
+			this.evaluateCustomContent("&nbsp;", this.lastRenderedCustomContentContainers[containerIndex]);
+		}
+
+		this.lastRenderedCustomContentContainers = new Array();
+	}
+    //=============================================================================================
+
+	// Render default view.
+    //=============================================================================================
+    this.renderDefaultView = function()
+    {}
+	//==================================================================================================================
+
+	//==================================================================================================================
+	this.logoutButtonHandler = function()
+    {}
+    //==================================================================================================================
+
+
+
+
+
+    // DEPRECATED METHODS
+	// _________________________________________________________________________________________________________________
+
+	// DEPRECATED, use viewManager.gotoNextView instead.
+	//==================================================================================================================
+	this.gotoNextState = function(callback)
+	{
+		this.gotoNextView(null, callback);
+		return;
+    }
+	//==================================================================================================================
+}
+
+// Extend ViewManager (Portal IS).
+UCViewManager.prototype = new ViewManager();
+window.viewManager = new UCViewManager();
+
+        </script>
+        
+		<title>Check Point UserCheck</title>
+	</head>
+
+	<body class="usercheck_body_background_class" unselectable="on" style="background-image: none; text-align: center; vertical-align: text-bottom;"><a href="http://172.20.5.254/UserCheck/PortalMain?IID=A18C44C4-6D72-6F67-6F76-696E9AB57E6F&origUrl=aHR0cDovL3d3dy5mYWNlYm9vay5jb20vcGx1Z2lucy9saWtlYm94LnBocD9ocmVmPWh0dHAlM0ElMkYlMkZ3d3cuZmFjZWJvb2suY29tJTJGdGhlbWVzYXdlc29tZSZ3aWR0aD0zNTAmaGVpZ2h0PTQzMiZjb2xvcnNjaGVtZT1saWdodCZzaG93X2ZhY2VzPXRydWUmc3RyZWFtPWZhbHNlJnNob3dfYm9yZGVyPXRydWUmaGVhZGVyPWZhbHNlJmZvcmNlX3dhbGw9ZmFsc2U&frame=1" target="_blank"><img src="block.png">&nbsp;&nbsp;Learn more...</a></body></html>

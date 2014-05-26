@@ -1,0 +1,417 @@
+
+
+/* Header ============================================================== */
+
+ td.headerTitle
+ {
+    font-size: 18px;
+    color: #FFFFFF;
+    padding-left: 10px;
+	background-image: url('/UserCheck/images/SK_IMG_HEADER_LEFT.jpg');
+	background-repeat:repeat-x;
+	font-family: tahoma;
+    text-align: left;
+    vertical-align: middle;
+ }
+
+td.headerImg
+{
+	background-image: url('/UserCheck/images/SK_IMG_HEADER_CENTER.jpg');
+	background-repeat:no-repeat;
+	width: 322px;
+}
+
+.resource_table
+{
+    background-image: url('/UserCheck/images/resourceListImg.PNG');
+    background-repeat: no-repeat;
+    filter:alpha(opacity=60);
+    opacity:0.6;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+}
+
+td.horizentalSeperator
+{
+    height: 2px;
+    background-image: url('/UserCheck/images/SK_IMG_MAIN_HORIZONAL_SEPERATOR.png');
+    background-repeat:repeat-x;
+}
+
+td.resource_list_icon_hover
+{
+	width: 25px;
+	height: 38px;
+	background-image: url('/UserCheck/images/SK_IMG_APP_BG_HOVER.png');
+	background-repeat:repeat-x;
+}
+
+td.resource_list_caption_hover
+{
+    font-size: 12px;
+	vertical-align: middle;
+	width: 25%;
+	background-image: url('/UserCheck/images/SK_IMG_APP_BG_HOVER.png');
+	background-repeat:repeat-x;
+	text-align: left;
+}
+
+td.resource_list_separator_hover
+{
+	width: 10px;
+	background-image: url('/UserCheck/images/SK_IMG_APP_BG_HOVER.png');
+	background-repeat:repeat-x;
+}
+
+td.resource_list_description_hover
+{
+    font-size: 12px;
+	vertical-align: middle;
+	background-image: url('/UserCheck/images/SK_IMG_APP_BG_HOVER.png');
+	background-repeat:repeat-x;
+	text-align: left;
+}
+
+td.resource_list_menu_show
+{
+	width: 58px;
+	visibility: visible;
+	background-image: url('/UserCheck/images/SK_IMG_EDIT_APP_BG_HOVER.png');
+	background-repeat:repeat-x;
+	text-align: left;
+	border: none;
+	padding-left: 5px;
+	padding-right: 3px;
+}
+
+td.resource_list_menu_right_show
+{
+	width: 4px;
+	font-size: 1px;
+	visibility: visible;
+	background-image: url('/UserCheck/images/SK_IMG_EDIT_APP_BG_RIGHT_HOVER.png');
+	background-repeat:no-repeat;
+	border: none;
+}
+
+td.resource_list_left_show
+{
+	width: 4px;
+	font-size: 1px;
+	visibility: visible;
+	background-image: url('/UserCheck/images/SK_IMG_EDIT_APP_BG_LEFT_HOVER.png');
+	background-repeat:no-repeat;
+	border: none;
+}
+
+/* Top row ----------------------------------------------- */
+.yellowbar_topLeftCorner
+{
+    background: url(/UserCheck/images/yellowbar_up_left_corner.gif);
+    background-repeat: no-repeat;
+    width: 13px;
+    height: 13px;
+    font-size: 1px;
+}
+
+.yellowbar_topMidBorder
+{
+    background: url(/UserCheck/images/yellowbar_strip_up_line.gif);
+    background-repeat: repeat-x;
+    font-size: 1px;
+}
+
+.yellowbar_topRightCorner
+{
+    background: url(/UserCheck/images/yellowbar_up_right_corner.gif);
+    background-repeat: no-repeat;
+    width: 13px;
+    height: 13px;
+    font-size: 1px;
+}
+
+/* Body sides ----------------------------------------------- */
+.yellowbar_midLeftBorder
+{
+    background: url(/UserCheck/images/yellowbar_strip_left_line.gif);
+    background-repeat: repeat-y;
+}
+
+.yellowbar_midRightBorder
+{
+    background: url(/UserCheck/images/yellowbar_strip_right_line.gif);
+    background-repeat: repeat-y;
+}
+
+/* Bottom row ----------------------------------------------- */
+.yellowbar_bottomLeftCorner
+{
+    background: url(/UserCheck/images/yellowbar_down_left_corner.gif);
+    background-repeat: no-repeat;
+    width: 13px;
+    height: 13px;
+}
+
+.yellowbar_bottomMidBorder
+{
+    background: url(/UserCheck/images/yellowbar_strip_down_line.gif);
+    background-repeat: repeat-x;
+}
+
+.yellowbar_bottomRightCorner
+{
+    background: url(/UserCheck/images/yellowbar_down_right_corner.gif);
+    background-repeat: no-repeat;
+    width: 13px;
+    height: 13px;
+}
+
+
+/* Seperator row ----------------------------------------------- */
+
+.yellowbar_sepLeft
+{
+    background: url(/UserCheck/images/yellowbar_sep_left.gif);
+    background-repeat: no-repeat;
+    width: 13px;
+    height: 4px;
+    font-size: 1px;
+}
+
+.yellowbar_sepMid
+{
+    background: url(/UserCheck/images/yellowbar_low_top_line.gif);
+    background-repeat: repeat-x;
+    font-size: 1px;
+}
+
+.yellowbar_sepRight
+{
+    background: url(/UserCheck/images/Syellowbar_sep_right.gif);
+    background-repeat: no-repeat;
+    width: 13px;
+    font-size: 1px;
+}
+
+.yellowbar_lowLeftBorder
+{
+    background: url(/UserCheck/images/yellowbar_low_left_line.gif);
+    background-repeat: repeat-y;
+}
+
+.yellowbar_lowRightBorder
+{
+    background: url(/UserCheck/images/yellowbar_low_right_line.gif);
+    background-repeat: repeat-y;
+}
+
+/* ===================================================================== */
+
+.toolbar_table
+{
+    background: url(/UserCheck/images/SK_IMG_TOOLBAR_BG_STRIP.jpg);
+    background-repeat: repeat-x;
+    padding: 2px;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.toolbar_separator
+{
+    background: url(/UserCheck/images/SK_IMG_TOOLBAR_SEPARATOR.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.folder_icon
+{
+    background:url(/UserCheck/images/SK_IMG_FOLDER_ICON.png) 0px no-repeat !important;
+}
+.quarantined_icon
+{
+    background:url(/UserCheck/images/SK_IMG_SECURE_REPOSITORY_ICON.png) 0px no-repeat !important;
+}
+.secureRepository_icon
+{
+    background:url(/UserCheck/images/SK_IMG_SECURE_REPOSITORY_ICON.png) 0px no-repeat !important;
+}
+.approval_icon
+{
+    background:url(/UserCheck/images/SK_IMG_APPROVAL_ICON.png) 0px no-repeat !important;
+}
+
+.delete_icon
+{
+    background: url(/UserCheck/images/SK_IMG_DELETE_ICON.png) 0px no-repeat !important;
+}
+
+.send_icon
+{
+    background: url(/UserCheck/images/SK_IMG_SEND_ICON.png) 0px no-repeat !important;
+}
+
+.sendToSecure_icon
+{
+    background:url(/UserCheck/images/SK_IMG_SECURE_REPOSITORY_ICON.png) 0px no-repeat !important;
+}
+
+.approve_icon
+{
+    background:url(/UserCheck/images/SK_IMG_APPROVE_ICON.png) 0px no-repeat !important;
+}
+
+.decline_icon
+{
+    background:url(/UserCheck/images/SK_IMG_DECLINE_ICON.png) 0px no-repeat !important;
+}
+
+.logout_icon
+{
+    background:url(/UserCheck/images/SK_IMG_LOGOUT_ICON.png) 0px no-repeat !important;
+}
+
+.help_icon
+{
+    background:url(/UserCheck/images/SK_IMG_HELP_ICON.png) 0px no-repeat !important;
+}
+
+.extendTime_icon
+{
+    background:url(/UserCheck/images/SK_IMG_EXTEND_TIME_ICON.png) 0px no-repeat !important;
+}
+
+.cp_icon
+{
+    background:url(/UserCheck/images/cp_logo.gif) 0px no-repeat !important;
+    height: 47px !important;
+}
+
+.mainPageToolbar
+{
+	background: url(/UserCheck/images/SK_IMG_TOOLBAR_BG_STRIP.jpg) 0px repeat-x !important;
+    border-left: solid 1px #C8C8C8 !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    border-top: none !important;
+}
+
+.mainPageTitleToolbar
+{
+	background: url(/UserCheck/images/SK_IMG_TITLE_BAR_BG_STRIP.jpg) 0px repeat-x !important;
+	height: 26px !important;
+	border-left: solid 1px #C8C8C8 !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    border-top: none !important;
+    padding: 0px !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+    padding-top: 2px !important;
+}
+
+.portalErrorMessageTableContainer
+{
+	width: 100%;
+	cursor: progress;
+}
+
+.portalErrorMessageTable
+{
+	padding: 0px;
+	width: 350px;
+	height: 150px;
+	background-color: #EEEEEE;
+	border: solid 1px #AAAAAA;
+	cursor: auto;
+}
+
+.portalMessage_title
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #4C6DCC;
+	padding: 10px;
+}
+
+.portalErrorMessage_button
+{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.portalMessageTableContainer
+{
+	width: 100%;
+	cursor: default;
+}
+
+.portalMessageTable
+{
+	padding: 0px;
+	margin: 0px;
+	width: 350px;
+	height: 150px;
+	background-color: #F5F5F5;
+	border: solid 1px #AAAAAA;
+	cursor: default;
+}
+
+.portalMessage_button
+{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.portalMessageDivHide
+{
+	display:none;
+}
+
+.screenShaderHide
+{
+	display:none;
+}
+.outer
+{
+	min-height:100%;/*for mozilla as IE treats height as min-height anyway*/
+	margin-left:170px;
+	/* background: white; */
+	background: white url('/UserCheck/img/bkg_general.gif') center;
+	border-left:1px solid #cdcdcd;
+	margin-bottom:-18px;
+	color: #000000;
+}
+
+.mainWithMenuView_Body
+{
+	background: white url('/UserCheck/img/bkg_general.gif') center;
+	color: #000000;
+	vertical-align: top;
+	width:100%;
+}
+
+
+
+
+.BodyMain {background: white url('/UserCheck/img/bkg_general.gif') center; color: black; border : 0px none; margin: 0px; padding: 0px; font-style:normal; font-variant:normal; font-weight:normal; font-size:10pt; font-family:Tahoma}
+.BodyTitle {background: white url('/UserCheck/img/center_strip.gif') repeat-x center; margin: 0px; padding: 0px; border: 0px none; }
+.HelpMain { background: white url('/UserCheck/img/bkg_general.gif') center; color: black; margin: 5px; padding 0px; font-style:normal; font-variant:normal; font-weight:normal; font-size:10pt; font-family:Tahoma }
+.HelpTitle { background: white url('/UserCheck/img/center_strip.gif') repeat-x center; margin: 0px; padding: 0px }
+.SubMenuOffBg {background: #cdcdcd url('/UserCheck/img/submenumoff.gif') repeat-x center; height: 22px; border: 0px none; padding: 0px; margin : 0px}
+.SubMenuOnBg {background: #FBAC32 url('/UserCheck/img/submenumon.gif') repeat-x center; height: 22px; border: 0px none; padding: 0px; margin: 0px }
+.Button { background: url('/UserCheck/img/button_mid.gif') repeat-x; height: 23; border:0 solid; color: #252525; padding-left:0px; padding-right:0px; padding-top:0px; padding-bottom:2px }
+.TabHead{ background: #eaeaea url('/UserCheck/img/bkg_head.gif') repeat-x top center; }
+.ReportsHead{ background: #eaeaea url('/UserCheck/img/bkg_head.gif') repeat-x top center; }
+@media screen {
+.WizBody, .WizBody P {background: white URL(/UserCheck/img/bkg_general.gif) repeat center center; color: black; font-family: Tahoma; margin: 0; padding: 0; border: 0; scrollbar-base-color: #91AABD; }
+.WizBodyWait {        background: white URL(/UserCheck/img/bkg_general.gif) repeat center center; color: black; font-family: Tahoma, Verdana; margin: 0; padding: 0; border: 0; scrollbar-base-color: #91AABD; cursor: wait; }
+.WizSide { background: white URL(/UserCheck/img/center_strip.gif) repeat-x center center; }
+.WizHeader { font: 16pt Arial; color: #3b60b9; }
+.WizInputAsText { border: solid 0; color: black; background: tansparent; }
+}
+

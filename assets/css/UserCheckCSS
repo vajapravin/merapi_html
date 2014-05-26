@@ -1,0 +1,387 @@
+
+p
+{
+	margin: 0px;
+}
+
+/* SDB_PREVIEW_EXCLUDE_BEGIN */
+
+.portalMessage_title
+{
+	font-size: 18px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background: url('/UserCheck/img/pop_up_banner.png') repeat-x center center;
+		height: 60px;
+	}
+
+.portalMessage_title_td
+{
+		padding-top: 13px;
+	}
+
+.portalMessageTableContainer
+{
+	font-family:
+			"Segoe UI",
+			Tahoma,
+			Arial,
+			"DejaVu Sans",
+			sans-serif;
+	width: 100%;
+	cursor: default;
+}
+
+/* SDB_PREVIEW_EXCLUDE_END */
+
+.usercheck_body_background_class
+{
+	background: url('/UserCheck/img/sliver_pattern.png') repeat scroll center center;	
+}
+
+.usercheck_main_background_class
+{
+	background: url('/UserCheck/img/blue_background.png') repeat-y scroll center center;	
+}
+
+.usercheck_content_table_class
+{
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 16px;
+	text-align:left;
+}
+
+.usercheck_title_class
+{
+	font-family:
+			"Segoe UI",
+			Tahoma,
+			Arial,
+			"DejaVu Sans",
+			sans-serif;
+	font-weight: 600;
+	font-size: 22px;
+	color: #3778FF;
+	width: expression( document.body.clientWidth > 334 ? "335px" : "auto" ); /* sets max-width for IE */
+	max-width: 335px; /* this sets the max-width value for all standards-compliant browsers */
+}
+
+.usercheck_message_icon_class
+{
+	padding-right: 10px;
+}
+
+.usercheck_red_highlight
+{
+	border: 1px red solid;
+}
+
+.usercheck_red_no_highlight
+{
+	border: auto;
+}
+
+.usercheck_message_class
+{
+	font-family: "Segoe UI",
+             Tahoma,
+             Arial,
+             "DejaVu Sans",
+             sans-serif;
+	font-size: 16px;
+	color: #1B2F5B;
+	line-height: 24px;
+	text-align: left;
+	width: expression( document.body.clientWidth > 334 ? "335px" : "auto" ); /* sets max-width for IE */
+	max-width: 335px; /* this sets the max-width value for all standards-compliant browsers */
+	min-width: 335px; /* this sets the max-width value for all standards-compliant browsers */
+}
+
+.usercheck_url_class
+{
+	font-family: "Segoe UI",
+             Tahoma,
+             Arial,
+             "DejaVu Sans",
+             sans-serif;
+	font-size: 16px;
+	/* padding: 10px 15px 0px 15px; */
+	line-height: 24px;
+	text-align: left;
+	width: expression( document.body.clientWidth > 334 ? "335px" : "auto" ); /* sets max-width for IE */
+	max-width: 335px; /* this sets the max-width value for all standards-compliant browsers */
+	text-decoration: underline;
+	color: #3778FF;
+}
+
+.usercheck_url_class:hover
+{
+	color: #1B2F5B;
+	text-decoration: underline;
+}
+
+.usercheck_disabled_url_class
+{
+	color: #1B2F5B;
+	text-decoration: none;
+	cursor: text;
+}
+
+.usercheck_disabled_url_class:hover
+{
+	color: #1B2F5B;
+	text-decoration: none;
+	cursor: text;
+}
+
+.usercheck_textual_input_class
+{
+	line-height: normal;
+		padding: 2px 2px 2px 2px;
+	margin-left: -1px;
+		width: 328px;
+	max-width: 328px;
+	min-width: 328px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.usercheck_textual_input_class_required
+{
+	color: #8F8F8F;
+}
+
+.usercheck_header_class
+{
+	vertical-align: top;
+	text-align: center;
+	height: 93px;
+}
+
+.usercheck_header_table_class
+{
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 18px;
+	width: 903px;
+	direction:ltr;
+}
+
+.usercheck_company_logo_class
+{
+	margin-left: 6px;
+	margin-bottom: 16px;
+	
+	max-width: 176px;
+	max-height: 52px;
+	
+	/* SDB_PREVIEW_EXCLUDE_BEGIN */
+	width: expression( this.width > 175 ? ( this.width / this.height > 176/52 ? "176px" : "auto" ) : "auto" ); /* sets max-width for IE6 */
+	height: expression( this.height > 51 ? ( this.width / this.height > 176/52 ? "auto" : "52px" ) : "auto" ); /* sets max-height for IE6 */
+	/* SDB_PREVIEW_EXCLUDE_END */
+}
+
+.usercheck_header_left_class
+{
+	width: 25px; 
+	height: 93px; 
+	background: url('/UserCheck/img/banner_left.png') no-repeat left center;
+}
+
+.usercheck_header_center_class
+{
+	width: 672px; 
+	height: 93px; 
+	background: url('/UserCheck/img/banner_center.png') repeat-x center center;
+}
+
+.usercheck_header_right_class
+{
+	width: 206px; 
+	height: 93px; 
+	background: url('/UserCheck/img/banner_right.png') no-repeat right center;
+	display: none;
+	text-align: center;
+}
+
+.usercheck_header_right_empty_class
+{
+	width: 206px; 
+	height: 93px; 
+	background: url('/UserCheck/img/banner_right_empty.png') no-repeat right center;
+	display: table-cell;
+}
+
+.usercheck_page_title_class
+{
+	position: relative;
+	margin-left:auto;
+	margin-right:auto;
+	width: 850px;
+	text-align: left;
+	font-family: "Segoe UI",
+             Tahoma,
+             Arial,
+             "DejaVu Sans",
+             sans-serif;
+	font-size: 23px;
+	font-weight: 600;
+	color: #FFFFFF;
+	top: -72px;
+	
+	-webkit-user-select: text;
+	-khtml-user-select: text;
+	-moz-user-select: text;
+	-o-user-select: text;
+	user-select: text;
+}
+
+.usercheck_footer_table_class
+{
+	margin-left:auto;
+	margin-right:auto;
+	width: 100%;
+	width: 100%;
+}
+
+.footer_logo
+{
+		background: url('/UserCheck/img/footer.png') no-repeat scroll center center;
+	}
+
+.footer_no_logo
+{
+		background: url('/UserCheck/img/footer_nologo.png') no-repeat scroll center center;
+	}
+
+.usercheck_footer_height_class
+{
+	height: 72px;
+}
+
+.usercheck_footer_class
+{
+	vertical-align: bottom;
+	text-align: center;
+}
+
+.usercheck_lang_select_div_class
+{
+	margin-left:auto;
+	margin-right:auto;
+	text-align: right;
+	vertical-align: center;
+	padding-top: 7px;
+	padding-right: 15px;
+	width: 845px;
+	font-family: "Segoe UI",
+             Tahoma,
+             Arial,
+             "DejaVu Sans",
+             sans-serif;
+	font-size: 14px;
+	color: #1B2F5B;
+	line-height: 2;
+}
+
+.usercheck_lang_select_class
+{
+	font-family: "Segoe UI",
+             Tahoma,
+             Arial,
+             "DejaVu Sans",
+             sans-serif;
+	font-size: 14px;
+	color: #1B2F5B;
+	line-height: 2;
+}
+
+.usercheck_ok_button_div_class
+{
+	width: 110px;
+	margin-left:auto;
+}
+
+/* Buttons section - split into several portions for IE support. */
+
+a.button {
+	background: transparent url('/UserCheck/img/btn_right_all.png') no-repeat scroll;
+    display: block;
+    height: 41px;
+	margin-top: 15px;
+    padding-right: 14px; /* Sliding doors padding. */
+    text-decoration: none;
+	cursor: pointer;
+	
+	/* Normal state right image position. */
+	background-position:  right 0px;
+}
+a.button span {
+	background: transparent url('/UserCheck/img/btn_left_all.png') no-repeat scroll;
+	display: block;
+    line-height: 41px;
+    padding: 0px 22px 0px 35px;
+	
+	/* Font styling. */
+	font-family: "Segoe UI",
+             Tahoma,
+             Arial,
+             "DejaVu Sans",
+             sans-serif;
+	font-weight: 600;
+	font-size: 18px;
+	color: #FFFFFF;
+	
+	/* Cursor styling. */
+	cursor: pointer;
+	
+	/* Normal state left image position. */
+	background-position:  left 0px;
+}
+
+a.cancel_button span {
+    padding: 0px 22px 0px 26px;
+}
+
+a.buttonHover {
+	/* Normal state right image position. */
+	background-position: right -41px;
+}
+
+a.buttonHover span {
+	/* Normal state left image position. */
+	background-position: left -41px;
+}
+
+a.buttonActive {
+	/* Normal state right image position. */
+	background-position: right -82px;
+}
+
+a.buttonActive span {
+	/* Normal state left image position. */
+	background-position: left -82px;
+}
+
+a.buttonDisabled {
+	/* Normal state right image position. */
+	background-position: right -123px;
+	cursor: default;
+}
+
+a.buttonDisabled span {
+	/* Text color. */
+	color: #BABABA;
+	
+	/* Cursor styling. */
+	cursor: default;
+	
+	/* Normal state left image position. */
+	background-position: left -123px;
+}
+
+a.buttonDisabled:hover {
+	color: #BABABA;
+}
+
